@@ -1,33 +1,44 @@
-async function fetchUserData() {
-    const apiUrl = "https://jsonplaceholder.typicode.com/users";
-    const dataContainer = document.getElementById("api-data");
-// Select DOM elements
-const addButton = document.getElementById("add-task");
-const taskInput = document.getElementById("task-input");
-const taskList = document.getElementById("task-list");
+document.addEventListener("DOMContentLoaded", function () {
+    // Select DOM elements
+    const addButton = document.getElementById("add-task");
+    const taskInput = document.getElementById("task-input");
+    const taskList = document.getElementById("task-list");
 
-    try {
-        // Fetch data from API
-        const response = await fetch(apiUrl);
-        const users = await response.json();
+    // Function to add a task
+    function addTask() {
+        const taskText = taskInput.value.trim();
 
-        // Clear loading message
-        dataContainer.innerHTML = "";
+        // Validate input
+        if (taskText === "") {
+            alert("Please enter a task.");
+            return;
+        }
 
-        // Create user list
-        const userList = document.createElement("ul");
-        users.forEach(user => {
-            const listItem = document.createElement("li");
-            listItem.textContent = user.name;
-            userList.appendChild(listItem);
-        });
+        // Create task list item
+        const listItem = document.createElement("li");
+        listItem.textContent = taskText;
 
-        // Append list to container
-        dataContainer.appendChild(userList);
-    } catch (error) {
-        dataContainer.textContent = "Failed to load user data.";
+        // Create remove button
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.className = "remove-btn";
+        removeButton.onclick = function () {
+            taskList.removeChild(listItem);
+        };
+
+        // Append elements
+        listItem.appendChild(removeButton);
+        taskList.appendChild(listItem);
+
+        // Clear input field
+        taskInput.value = "";
     }
-}
 
-// Run function when the page loads
-document.addEventListener("DOMContentLoaded", fetchUserData);
+    // Attach event listeners
+    addButton.addEventListener("click", addTask);
+    taskInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            addTask();
+        }
+    });
+});
