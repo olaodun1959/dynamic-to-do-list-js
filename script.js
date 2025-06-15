@@ -17,11 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
         // Create task list item
         const listItem = document.createElement("li");
         listItem.textContent = taskText;
+        listItem.classList.add("task-item"); // Add class for styling
 
         // Create remove button
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
-        removeButton.className = "remove-btn";
+        removeButton.classList.add("remove-btn"); // Add class for styling
         removeButton.onclick = function () {
             taskList.removeChild(listItem);
         };
