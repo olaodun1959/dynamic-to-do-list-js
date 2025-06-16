@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let taskItem = document.createElement("li");
         taskItem.textContent = taskText;
 
+        // Add a class for styling
+        taskItem.classList.add("task-item");
+
         let removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
         removeButton.className = "remove-btn";
@@ -50,6 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
         storedTasks.forEach(taskText => {
             let taskItem = document.createElement("li");
             taskItem.textContent = taskText;
+
+            // Add a class for styling
+            taskItem.classList.add("task-item");
 
             let removeButton = document.createElement("button");
             removeButton.textContent = "Remove";
